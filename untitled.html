@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Learning Hub | School Exhibition</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050816;
+    --panel: #111a30;
+    --cyan: #67e8f9;
+    --blue: #2563eb;
+    --text: #e2e8f0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: white;
+    min-height: 100vh;
+}
+
+.screen {
+    min-height: 100vh;
+    display: none;
+    padding: 30px 18px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#home {
+    display: flex;
+    background:
+        radial-gradient(ellipse at top, #173778 0%, transparent 65%),
+        var(--bg);
+}
+
+.school-logo {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+    margin-bottom: 22px;
+    box-shadow: 0 0 30px #2563eb80;
+}
+
+.tag {
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(30px, 7vw, 46px);
+    color: var(--cyan);
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+h2 {
+    color: var(--cyan);
+    margin-bottom: 12px;
+}
+
+.intro {
+    color: #d0d9eb;
+    line-height: 1.8;
+    font-size: 15px;
+    max-width: 540px;
+    margin-bottom: 15px;
+}
+
+button {
+    background: linear-gradient(135deg, #0891b2, #4f46e5);
+    color: white;
+    border: 1px solid #67e8f9;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.credit {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 13px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid #263653;
+    border-radius: 18px;
+    padding: 24px 18px;
+    margin: 12px 0;
+    width: 100%;
+    max-width: 430px;
+}
+
+.card p {
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+#dashboard,
+#games,
+#presentation,
+#quiz,
+#results,
+#slides {
+    background:
+        radial-gradient(ellipse at top, #142c60 0%, transparent 65%),
+        var(--bg);
+}
+
+#dashboard,
+#games,
+#presentation {
+    justify-content: flex-start;
+    padding-top: 45px;
+}
+
+#answers button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+#feedback {
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+#slideIcon {
+    font-size: 55px;
+    margin-bottom: 18px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.school-logo {
+    animation: float 4s ease-in-out infinite;
+}
+
+@media (max-width: 400px) {
+    .school-logo {
+        width: 105px;
+        height: 105px;
+    }
+
+    .intro {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 20px 14px;
+    }
+}
+  /* ===== SCIENCE QUIZ NEON STYLE ===== */
+
+#scienceQuiz .card,
+#scienceResults .card {
+background: linear-gradient(145deg, #101a35, #191333);
+border: 1px solid rgba(0, 229, 255, 0.45);
+border-radius: 20px;
+padding: 22px;
+box-shadow: 0 0 25px rgba(0, 229, 255, 0.12);
+}
+
+#scienceQuiz h1,
+#scienceResults h1 {
+color: #00e5ff;
+text-shadow: 0 0 14px rgba(0, 229, 255, 0.4);
+}
+
+#scienceQuestionNumber {
+color: #a89bff;
+font-weight: bold;
+letter-spacing: 2px;
+font-size: 13px;
+}
+
+.science-option {
+width: 100%;
+padding: 14px;
+text-align: left;
+color: #f3f5ff;
+background: #202642;
+border: 1px solid #424b70;
+border-radius: 12px;
+font-size: 15px;
+cursor: pointer;
+transition: 0.2s;
+}
+
+.science-option:active {
+transform: scale(0.98);
+}
+
+.science-option:disabled {
+opacity: 1;
+}
+
+.science-option.science-correct {
+background: #123c36;
+border: 2px solid #00e6a0;
+color: #80ffd5;
+}
+
+.science-option.science-wrong {
+background: #48232f;
+border: 2px solid #ff5577;
+color: #ffb2c1;
+}
+
+#scienceFeedback {
+color: #dce6ff;
+font-size: 14px;
+}
+
+#scienceNextButton:disabled {
+opacity: 0.45;
+cursor: not-allowed;
+}
+
+#scienceResults #scienceFinalScore {
+text-shadow: 0 0 20px rgba(0, 229, 255, 0.45);
+}
+
+@media (max-width: 480px) {
+#scienceQuiz .card,
+#scienceResults .card {
+padding: 16px;
+}
+
+#scienceQuiz h2 {
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.science-option {
+    font-size: 14px;
+    padding: 12px;
+}
+
+  }
+/* ===== JARVIS FUTURISTIC DESIGN ===== */
+
+#jarvisToggle {
+    position: fixed;
+    right: 18px;
+    bottom: 20px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: 2px solid #00eaff;
+    background: radial-gradient(circle, #164a75, #07101f);
+    color: #00eaff;
+    font-size: 30px;
+    box-shadow: 0 0 18px #00bfff;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#jarvisChat {
+    position: fixed;
+    right: 12px;
+    bottom: 90px;
+    width: min(350px, calc(100vw - 24px));
+    height: min(460px, calc(100dvh - 125px));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #080f20;
+    color: #eaf7ff;
+    border: 1px solid #00bfff;
+    border-radius: 18px;
+    box-shadow: 0 0 25px #003b65;
+    font-family: Arial, sans-serif;
+    z-index: 9998;
+}
+
+.jarvis-hidden {
+    display: none !important;
+}
+
+.jarvis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: linear-gradient(110deg, #10294a, #171438);
+    border-bottom: 1px solid #174c77;
+    flex-shrink: 0;
+}
+
+.jarvis-header h3 {
+    margin: 0 0 5px;
+    color: #00eaff;
+    letter-spacing: 3px;
+}
+
+.jarvis-header p {
+    margin: 0 0 5px;
+    color: #a9c7e8;
+    font-size: 10px;
+}
+
+.jarvis-header span {
+    color: #45ffbd;
+    font-size: 11px;
+}
+
+#jarvisClose {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.jarvis-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.jarvis-message {
+    max-width: 90%;
+    padding: 11px 13px;
+    border-radius: 13px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.jarvis-bot {
+    align-self: flex-start;
+    background: #142640;
+    border: 1px solid #23527b;
+}
+
+.jarvis-user {
+    align-self: flex-end;
+    background: linear-gradient(120deg, #075a88, #333080);
+    border: 1px solid #348dff;
+}
+
+.jarvis-quick-questions {
+    padding: 5px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid #1c3555;
+    flex-shrink: 0;
+}
+
+.jarvis-questions-hidden {
+    display: none !important;
+}
+
+.jarvis-question {
+    width: 100%;
+    text-align: left;
+    padding: 5px 9px;
+    background: #101e35;
+    color: #bceeff;
+    border: 1px solid #17618a;
+    border-radius: 8px;
+    font-size: 10px;
+    line-height: 1.3;
+    cursor: pointer;
+}
+
+.jarvis-question:active {
+    background: #183c63;
+}
+
+.jarvis-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #0c172a;
+    border-top: 1px solid #1c3555;
+    flex-shrink: 0;
+    min-height: 64px;
+    box-sizing: border-box;
+}
+
+#jarvisInput {
+    flex: 1;
+    min-width: 0;
+    padding: 11px;
+    color: white;
+    background: #17243a;
+    border: 1px solid #31506e;
+    border-radius: 22px;
+    outline: none;
+    font-size: 12px;
+}
+
+#jarvisInput:focus {
+    border-color: #00eaff;
+}
+
+.jarvis-input-area button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    padding: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d9ff, #6860ff);
+    color: #06101d;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+  /* JARVIS LOGO FIX */
+
+#jarvisToggle {
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.jarvis-logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 50%;
+}
+
+.jarvis-mini-logo {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+#jarvisQuestionsToggle {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 10px;
+    background: #101e35;
+    color: #00eaff;
+    border: none;
+    border-top: 1px solid #1c3555;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.jarvis-questions-hidden {
+    display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME SCREEN -->
+<section id="home" class="screen">
+
+    <img
+        src="school-logo.png"
+        alt="Phoenix International School Logo"
+        class="school-logo"
+    >
+
+    <div class="tag">PHOENIX INTERNATIONAL SCHOOL</div>
+
+    <h1>Welcome To Exhibition!</h1>
+
+    <h2>🤖 AI Learning Hub</h2>
+
+    <p class="intro">
+        Welcome to my interactive AI Learning Hub!
+        This project introduces the fascinating world of
+        Artificial Intelligence through visual presentations
+        and educational games. Discover how AI works,
+        explore its real-world applications, and test your
+        knowledge through fun challenges.
+
+        My goal is to make learning about AI interesting,
+        interactive, and enjoyable for everyone.
+    </p>
+
+    <button onclick="showScreen('dashboard')">
+        🚀 START EXPLORING
+    </button>
+
+    <p class="credit">
+        Project made by <strong>Aditya</strong>
+    </p>
+
+    <p class="credit">LEARN • PLAY • DISCOVER</p>
+
+</section>
+
+
+<!-- MAIN DASHBOARD -->
+<section id="dashboard" class="screen">
+
+    <div class="tag">YOUR AI ADVENTURE STARTS HERE</div>
+
+    <h1>Explore AI!</h1>
+
+    <p class="intro">Choose a section to begin your journey.</p>
+
+    <div class="card">
+        <h2>🎮 Educational Games</h2>
+        <p>Challenge yourself with quizzes and fun learning games.</p>
+        <button onclick="showScreen('games')">PLAY GAMES</button>
+    </div>
+
+    <div class="card">
+        <h2>🧠 AI Presentation</h2>
+        <p>Discover AI through visual explanations and fascinating facts.</p>
+        <button onclick="showScreen('presentation')">EXPLORE AI</button>
+    </div>
+
+    <button onclick="showScreen('home')">← BACK TO WELCOME</button>
+
+</section>
+
+
+<!-- GAMES MENU -->
+<section id="games" class="screen">
+
+    <h1>🎮 AI Games</h1>
+
+    <p class="intro">Choose a challenge and test your knowledge!</p>
+
+    <div class="card">
+        <h2>🧠 AI Knowledge Quiz</h2>
+        <p>Test what you know about Artificial Intelligence.</p>
+        <button onclick="startQuiz()">START QUIZ</button>
+    </div>
+
+    <div class="card">
+    <h2>🔬 SCIENCE QUIZ</h2>
+    <p>Test your knowledge of Physics, Chemistry, Biology and Sound!</p>
+    <button onclick="startScienceQuiz()">START SCIENCE QUIZ 🚀</button>
+    </div>
+
+    <button onclick="showScreen('dashboard')">← BACK TO MENU</button>
+
+</section>
+
+
+<!-- QUIZ -->
+<section id="quiz" class="screen">
+
+    <div class="tag" id="questionNumber"></div>
+
+    <h1>AI Quiz Challenge</h1>
+
+    <div class="card">
+        <h2 id="questionText"></h2>
+        <div id="answers"></div>
+        <p id="feedback" aria-live="polite"></p>
+    </div>
+
+    <p id="scoreText">Score: 0</p>
+
+    <button id="nextButton" onclick="nextQuestion()" hidden>
+        NEXT QUESTION →
+    </button>
+
+    <button onclick="showScreen('games')">EXIT QUIZ</button>
+
+</section>
+
+
+<!-- RESULTS -->
+<section id="results" class="screen">
+
+    <div style="font-size:65px">🏆</div>
+
+    <h1>Quiz Complete!</h1>
+
+    <h2 id="finalScore"></h2>
+
+    <p class="intro" id="resultMessage"></p>
+
+    <button onclick="startQuiz()">PLAY AGAIN</button>
+    <button onclick="showScreen('games')">BACK TO GAMES</button>
+
+</section>
+
+
+<!-- PRESENTATION MENU -->
+<section id="presentation" class="screen">
+
+    <h1>🧠 Discover AI</h1>
+
+    <p class="intro">
+        Explore the fascinating world of Artificial Intelligence.
+    </p>
+
+    <div class="card">
+        <h2>Ready to learn?</h2>
+
+        <p>
+            Discover what AI is, how it works,
+            its everyday applications, and its future.
+        </p>
+
+        <button onclick="startPresentation()">START PRESENTATION</button>
+    </div>
+
+    <button onclick="showScreen('dashboard')">← BACK TO MENU</button>
+
+</section>
+
+
+
+<!-- AI PRESENTATION VIDEO --><section id="slides" class="screen">
+    <div class="card ai-video-card">
+        <h1>🤖 AI PRESENTATION</h1>
+        <p class="intro">Discover Artificial Intelligence in 5 minutes!</p>    <div class="video-container">
+  <iframe
+    id="presentationVideo"
+    src="https://www.youtube.com/embed/ad79nYk2keg"
+    title="Artificial Intelligence Explained"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+    </div>
+
+    <p class="video-caption">🎬 Artificial Intelligence Explained</p>
+
+    <button onclick="showScreen('presentation')">
+        ← BACK
+    </button>
+</div>
+
+</section>
+  <script>
+/* SCREEN NAVIGATION */
+
+const screenIds = [
+"home",
+"dashboard",
+"games",
+"quiz",
+"results",
+"presentation",
+"slides",
+"scienceQuiz",
+"scienceResults"
+];
+
+function showScreen(id) {
+      if (id !== "slides") {
+        const video = document.getElementById("presentationVideo");
+        if (video) {
+            video.src = video.src;
+        }
+    }
+    screenIds.forEach(screenId => {
+        document.getElementById(screenId).style.display = "none";
+    });
+
+    document.getElementById(id).style.display = "flex";
+    window.scrollTo(0, 0);
+}
+
+
+/* EDUCATIONAL QUIZ */
+
+const questions = [
+    {
+        q: "What does AI stand for?",
+        options: [
+            "Automated Internet",
+            "Artificial Intelligence",
+            "Advanced Information",
+            "Automatic Interaction"
+        ],
+        answer: 1,
+        explanation: "AI stands for Artificial Intelligence."
+    },
+    {
+        q: "Which is an example of AI?",
+        options: [
+            "A wooden chair",
+            "A regular pencil",
+            "A voice assistant recognising speech",
+            "An ordinary light switch"
+        ],
+        answer: 2,
+        explanation: "AI can recognise speech and respond to requests."
+    },
+    {
+        q: "What helps many AI systems learn patterns?",
+        options: ["Data", "Paint", "Paper clips", "Switches alone"],
+        answer: 0,
+        explanation: "Many AI systems learn patterns from data."
+    },
+    {
+        q: "Can AI sometimes make mistakes?",
+        options: ["No, never", "Yes", "Only at night", "Only offline"],
+        answer: 1,
+        explanation: "AI can make errors, so important answers should be checked."
+    },
+    {
+        q: "Which is a responsible way to use AI?",
+        options: [
+            "Believe everything it says",
+            "Share private information",
+            "Check important answers",
+            "Use it to cheat"
+        ],
+        answer: 2,
+        explanation: "Check important information and protect your privacy."
+    }
+];
+
+let questionIndex = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz() {
+    questionIndex = 0;
+    score = 0;
+    showScreen("quiz");
+    renderQuestion();
+}
+
+function renderQuestion() {
+    answered = false;
+
+    const question = questions[questionIndex];
+
+    document.getElementById("questionNumber").textContent =
+        "QUESTION " + (questionIndex + 1) + " OF " + questions.length;
+
+    document.getElementById("questionText").textContent = question.q;
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("scoreText").textContent = "Score: " + score;
+    document.getElementById("nextButton").hidden = true;
+
+    const answers = document.getElementById("answers");
+    answers.innerHTML = "";
+
+    question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.onclick = () => chooseAnswer(index);
+
+        answers.appendChild(button);
+    });
+}
+
+function chooseAnswer(index) {
+    if (answered) return;
+
+    answered = true;
+
+    const question = questions[questionIndex];
+
+    document.querySelectorAll("#answers button").forEach(button => {
+        button.disabled = true;
+    });
+
+    if (index === question.answer) {
+        score++;
+
+        document.getElementById("feedback").textContent =
+            "✅ Correct! " + question.explanation;
+    } else {
+        document.getElementById("feedback").textContent =
+            "❌ Not quite. " + question.explanation;
+    }
+
+    document.getElementById("scoreText").textContent = "Score: " + score;
+
+    const next = document.getElementById("nextButton");
+    next.hidden = false;
+
+    next.textContent =
+        questionIndex === questions.length - 1
+        ? "SEE RESULTS 🏆"
+        : "NEXT QUESTION →";
+}
+
+function nextQuestion() {
+    if (!answered) return;
+
+    questionIndex++;
+
+    if (questionIndex < questions.length) {
+        renderQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    document.getElementById("finalScore").textContent =
+        "Your score: " + score + " / " + questions.length;
+
+    let message;
+
+    if (score === questions.length) {
+        message = "Perfect score! You're an AI champion!";
+    } else if (score >= 3) {
+        message = "Great work! Keep exploring AI.";
+    } else {
+        message = "Good attempt! Learn more and try again.";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+    showScreen("results");
+}
+
+
+/* AI PRESENTATION */
+
+const slides = [
+    {
+        icon: "🤖",
+        title: "What Is Artificial Intelligence?",
+        text: "Artificial Intelligence (AI) is a field of computer science that develops systems capable of tasks such as recognising patterns, understanding language, and making predictions."
+    },
+    {
+        icon: "🧠",
+        title: "How Does AI Work?",
+        text: "Many AI systems are trained using data. During training, they learn patterns that help them make predictions, recommendations, or responses."
+    },
+    {
+        icon: "📚",
+        title: "How AI Learns",
+        text: "Machine learning uses examples to find patterns. For instance, an image-recognition system can learn to recognise objects from labelled pictures."
+    },
+    {
+        icon: "📱",
+        title: "AI Around Us",
+        text: "AI can help power voice assistants, translation tools, navigation predictions, photo features, and personalised recommendations."
+    },
+    {
+        icon: "🏥",
+        title: "AI in Healthcare",
+        text: "Healthcare professionals can use AI to help analyse medical images, organise information, and support research. Human experts remain essential."
+    },
+    {
+        icon: "🎓",
+        title: "AI in Education",
+        text: "AI tools can explain concepts, help learners practise, and support teachers. Students should still think independently and verify information."
+    },
+    {
+        icon: "⚖️",
+        title: "Benefits and Challenges",
+        text: "AI can save time and assist with complex tasks. However, it can produce errors, reflect bias, and raise privacy concerns."
+    },
+    {
+        icon: "🌍",
+        title: "The Future of AI",
+        text: "AI will continue to develop. Understanding it and using it responsibly can help people make informed decisions about this technology."
+    }
+];
+
+let slideIndex = 0;
+
+function startPresentation() {
+showScreen("slides");
+  }
+
+function renderSlide() {
+    const slide = slides[slideIndex];
+
+    document.getElementById("slideNumber").textContent =
+        "SLIDE " + (slideIndex + 1) + " OF " + slides.length;
+
+    document.getElementById("slideIcon").textContent = slide.icon;
+    document.getElementById("slideTitle").textContent = slide.title;
+    document.getElementById("slideText").textContent = slide.text;
+
+    document.getElementById("previousSlideButton").disabled =
+        slideIndex === 0;
+
+    document.getElementById("nextSlideButton").textContent =
+        slideIndex === slides.length - 1 ? "FINISH ✓" : "NEXT →";
+}
+
+function previousSlide() {
+    if (slideIndex > 0) {
+        slideIndex--;
+        renderSlide();
+    }
+}
+
+function nextSlide() {
+    if (slideIndex < slides.length - 1) {
+        slideIndex++;
+        renderSlide();
+    } else {
+        showScreen("presentation");
+    }
+}
+  // ===== SCIENCE QUIZ =====
+const scienceQuestions = [
+{
+question: "A car travels 180 metres in 12 seconds. What is its average speed?",
+options: ["12 m/s", "15 m/s", "18 m/s", "20 m/s"],
+answer: 1,
+explanation: "Speed = distance ÷ time = 180 ÷ 12 = 15 m/s."
+},
+{
+question: "Why does a pressure cooker cook food faster?",
+options: [
+"It lowers the boiling point of water.",
+"It raises the boiling point by increasing pressure.",
+"It reduces the specific heat of water.",
+"It prevents water from absorbing heat."
+],
+answer: 1,
+explanation: "Higher pressure raises water's boiling point, allowing food to cook at a higher temperature."
+},
+{
+question: "Two bulbs are connected in series. If one bulb fuses, what happens to the other?",
+options: [
+"It glows brighter.",
+"It glows normally.",
+"It also goes out.",
+"It glows dimmer but stays on."
+],
+answer: 2,
+explanation: "A fused bulb breaks the series circuit, stopping current through both bulbs."
+},
+{
+question: "An atom contains 11 protons and 12 neutrons. What is its mass number?",
+options: ["11", "12", "23", "24"],
+answer: 2,
+explanation: "Mass number = protons + neutrons = 11 + 12 = 23."
+},
+{
+question: "When zinc reacts with dilute hydrochloric acid, which gas is produced?",
+options: ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"],
+answer: 1,
+explanation: "Zinc reacts with dilute hydrochloric acid to produce hydrogen gas."
+},
+{
+question: "Which of these is a chemical change?",
+options: ["Melting ice", "Breaking glass", "Rusting iron", "Dissolving sugar in water"],
+answer: 2,
+explanation: "Rusting forms a new substance called iron oxide."
+},
+{
+question: "Which cell organelle releases most energy during aerobic respiration?",
+options: ["Ribosome", "Mitochondrion", "Nucleus", "Vacuole"],
+answer: 1,
+explanation: "Mitochondria produce most of the cell's usable energy during aerobic respiration."
+},
+{
+question: "Which component of blood mainly helps in clotting?",
+options: ["Red blood cells", "White blood cells", "Platelets", "Haemoglobin"],
+answer: 2,
+explanation: "Platelets help form clots that reduce bleeding."
+},
+{
+question: "Which plant tissue transports water and minerals from roots to leaves?",
+options: ["Phloem", "Xylem", "Epidermis", "Stomata"],
+answer: 1,
+explanation: "Xylem transports water and dissolved minerals from roots to the rest of the plant."
+},
+{
+question: "A sound wave travels at 340 m/s and has a frequency of 170 Hz. What is its wavelength?",
+options: ["0.5 m", "1 m", "2 m", "4 m"],
+answer: 2,
+explanation: "Wavelength = speed ÷ frequency = 340 ÷ 170 = 2 m."
+}
+];
+
+let scienceQuestionIndex = 0;
+let scienceScore = 0;
+let scienceAnswered = false;
+
+function startScienceQuiz() {
+scienceQuestionIndex = 0;
+scienceScore = 0;
+scienceAnswered = false;
+showScreen("scienceQuiz");
+renderScienceQuestion();
+}
+
+function renderScienceQuestion() {
+const q = scienceQuestions[scienceQuestionIndex];
+
+document.getElementById("scienceQuestionNumber").textContent =
+    "QUESTION " + (scienceQuestionIndex + 1) + " / " + scienceQuestions.length;
+
+document.getElementById("scienceProgress").style.width =
+    ((scienceQuestionIndex + 1) / scienceQuestions.length * 100) + "%";
+
+document.getElementById("scienceQuestionText").textContent = q.question;
+document.getElementById("scienceFeedback").textContent = "";
+document.getElementById("scienceOptions").innerHTML = "";
+scienceAnswered = false;
+
+q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.textContent = String.fromCharCode(65 + index) + ". " + option;
+    button.className = "science-option";
+    button.onclick = function() {
+        chooseScienceAnswer(index);
+    };
+    document.getElementById("scienceOptions").appendChild(button);
+});
+
+document.getElementById("scienceNextButton").textContent =
+    scienceQuestionIndex === scienceQuestions.length - 1
+    ? "SEE RESULTS 🏆"
+    : "NEXT QUESTION ➜";
+
+document.getElementById("scienceNextButton").disabled = true;
+
+}
+
+function chooseScienceAnswer(selectedIndex) {
+if (scienceAnswered) return;
+scienceAnswered = true;
+
+const q = scienceQuestions[scienceQuestionIndex];
+const buttons = document.querySelectorAll("#scienceOptions .science-option");
+
+buttons.forEach(function(button, index) {
+    button.disabled = true;
+
+    if (index === q.answer) {
+        button.classList.add("science-correct");
+    } else if (index === selectedIndex) {
+        button.classList.add("science-wrong");
+    }
+});
+
+const feedback = document.getElementById("scienceFeedback");
+
+if (selectedIndex === q.answer) {
+    scienceScore++;
+    feedback.textContent = "✅ Correct! " + q.explanation;
+} else {
+    feedback.textContent = "❌ Not quite. " + q.explanation;
+}
+
+document.getElementById("scienceNextButton").disabled = false;
+
+}
+
+function nextScienceQuestion() {
+if (!scienceAnswered) return;
+
+if (scienceQuestionIndex < scienceQuestions.length - 1) {
+    scienceQuestionIndex++;
+    renderScienceQuestion();
+} else {
+    showScienceResults();
+}
+
+}
+
+function showScienceResults() {
+showScreen("scienceResults");
+
+document.getElementById("scienceFinalScore").textContent =
+    scienceScore + " / " + scienceQuestions.length;
+
+const percentage = scienceScore * 10;
+let message = "";
+
+if (percentage === 100) {
+    message = "Perfect score! You're a science superstar! 🌟";
+} else if (percentage >= 70) {
+    message = "Excellent work! Your science knowledge is strong! 🚀";
+} else if (percentage >= 40) {
+    message = "Good effort! Keep learning and try again! 💡";
+} else {
+    message = "Keep practising! Every attempt helps you learn. 🔬";
+}
+
+document.getElementById("scienceResultMessage").textContent = message;
+
+  }
+</script>
+  <div id="scienceQuiz" class="screen">
+    <div class="card">
+        <h1>🔬 SCIENCE QUIZ</h1>
+        <p id="scienceQuestionNumber">QUESTION 1 / 10</p>    <div style="width:100%;height:8px;background:#252747;border-radius:10px;margin:15px 0;overflow:hidden;">
+        <div id="scienceProgress" style="height:100%;width:10%;background:linear-gradient(90deg,#00e5ff,#8a5cff);transition:width 0.3s;"></div>
+    </div>
+
+    <h2 id="scienceQuestionText">Your question will appear here.</h2>
+
+    <div id="scienceOptions" style="display:flex;flex-direction:column;gap:12px;margin-top:20px;"></div>
+
+    <p id="scienceFeedback" style="margin-top:18px;line-height:1.6;"></p>
+
+    <button id="scienceNextButton" onclick="nextScienceQuestion()" disabled>
+        NEXT QUESTION ➜
+    </button>
+
+    <button onclick="showScreen('games')" style="margin-top:10px;">
+        ← BACK TO GAMES
+    </button>
+</div>
+
+</div><!-- SCIENCE QUIZ RESULTS SCREEN --><div id="scienceResults" class="screen">
+    <div class="card" style="text-align:center;">
+        <h1>🏆 QUIZ COMPLETED!</h1>
+        <p>Your Science Quiz score:</p>    <h2 id="scienceFinalScore" style="font-size:48px;color:#00e5ff;">
+        0 / 10
+    </h2>
+
+    <p id="scienceResultMessage"></p>
+
+    <button onclick="startScienceQuiz()">🔄 PLAY AGAIN</button>
+
+    <button onclick="showScreen('games')" style="margin-top:10px;">
+        ← BACK TO GAMES
+    </button>
+</div>
+
+</div>
+
+<!-- ===== JARVIS AI CHATBOT ===== --><button id="jarvisToggle" aria-label="Open JARVIS">
+    <img src="jarvis-logo.jpg" alt="JARVIS Logo" class="jarvis-logo-image">
+</button><div id="jarvisChat" class="jarvis-hidden"><div class="jarvis-header">
+    <div class="jarvis-brand">
+        <img src="jarvis-logo.jpg" alt="JARVIS Logo" class="jarvis-mini-logo">
+        <div>
+            <h3>JARVIS</h3>
+            <p>AI LEARNING ASSISTANT</p>
+            <span class="jarvis-status">● ONLINE</span>
+        </div>
+    </div>
+
+    <button id="jarvisClose" aria-label="Close JARVIS">✕</button>
+</div>
+
+<div id="jarvisMessages" class="jarvis-messages">
+    <div class="jarvis-message jarvis-bot">
+        Hello! 👋 I'm JARVIS, your AI learning assistant.
+        <br><br>
+        Choose a question below or type your own!
+    </div>
+</div>
+
+<button type="button" id="jarvisQuestionsToggle">
+    💡 Suggested Questions ▼
+</button>
+
+<div class="jarvis-quick-questions jarvis-questions-hidden">
+    <button class="jarvis-question">What is Artificial Intelligence?</button>
+    <button class="jarvis-question">How does AI work?</button>
+    <button class="jarvis-question">What are the benefits of AI?</button>
+    <button class="jarvis-question">Can AI replace humans?</button>
+</>
+
+<form id="jarvisForm" class="jarvis-input-area">
+    <input
+        id="jarvisInput"
+        type="text"
+        placeholder="Ask JARVIS anything..."
+        autocomplete="off"
+        maxlength="300"
+    >
+    <button type="submit" aria-label="Send message">➤</button>
+</form>
+
+</><!-- ===== END JARVIS INTERFACE ===== -->
+<script>
+/* ===== JARVIS AI BRAIN ===== */
+
+const jarvisToggle = document.getElementById("jarvisToggle");
+const jarvisChat = document.getElementById("jarvisChat");
+const jarvisClose = document.getElementById("jarvisClose");
+const jarvisMessages = document.getElementById("jarvisMessages");
+const jarvisForm = document.getElementById("jarvisForm");
+const jarvisInput = document.getElementById("jarvisInput");
+
+/* OPEN AND CLOSE JARVIS */
+
+jarvisToggle.addEventListener("click", () => {
+    jarvisChat.classList.remove("jarvis-hidden");
+    jarvisToggle.style.display = "none";
+});
+
+jarvisClose.addEventListener("click", () => {
+    jarvisChat.classList.add("jarvis-hidden");
+    jarvisToggle.style.display = "flex";
+});
+
+/* DISPLAY MESSAGES */
+
+function jarvisMessage(text, sender) {
+    const message = document.createElement("div");
+    message.className = "jarvis-message jarvis-" + sender;
+    message.textContent = text;
+    jarvisMessages.appendChild(message);
+    jarvisMessages.scrollTop = jarvisMessages.scrollHeight;
+}
+
+/* JARVIS RESPONSES */
+
+function jarvisAnswer(question) {
+    const q = question.toLowerCase();
+
+    if (q.includes("what is artificial intelligence") ||
+        q.includes("what is ai") ||
+        q === "ai") {
+        return "Artificial Intelligence (AI) is technology that enables computers to perform tasks such as learning, problem-solving, and understanding language.";
+    }
+
+    if (q.includes("how does ai work") ||
+        q.includes("how ai works")) {
+        return "AI systems use algorithms and data to identify patterns and produce predictions or responses. Different AI systems work in different ways.";
+    }
+
+    if (q.includes("benefits") || q.includes("advantages")) {
+        return "AI can help people learn, analyze information, assist doctors, automate repetitive tasks, and solve complex problems.";
+    }
+
+    if (q.includes("replace humans") || q.includes("replace human")) {
+        return "AI can automate some tasks, but humans remain important for creativity, empathy, judgment, and responsibility. AI is often most useful as a tool that helps people.";
+    }
+
+    if (q.includes("hello") || q.includes("hi") || q.includes("hey")) {
+        return "Hello! 👋 JARVIS is online. Ask me about AI, science, or technology!";
+    }
+
+    if (q.includes("your name") || q.includes("who are you")) {
+        return "I am J.A.R.V.I.S., your AI Learning Hub assistant!";
+    }
+
+    if (q.includes("science")) {
+        return "Science helps us understand the natural world through observation, experiments, and evidence.";
+    }
+
+    if (q.includes("technology")) {
+        return "Technology uses scientific knowledge to create tools and systems that help solve problems.";
+    }
+
+    if (q.includes("thank")) {
+        return "You're welcome! Happy learning! 🚀";
+    }
+
+    return "I'm still learning! Try asking me about Artificial Intelligence, its benefits, science, or technology.";
+}
+
+/* SEND TYPED QUESTIONS */
+
+jarvisForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const question = jarvisInput.value.trim();
+
+    if (!question) return;
+
+    jarvisMessage(question, "user");
+    jarvisInput.value = "";
+
+    jarvisMessage("Thinking...", "bot");
+
+fetch("/.netlify/functions/jarvis", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        message: question
+    })
+})
+.then(response => response.json())
+.then(data => {
+    const messages = document.querySelectorAll(".jarvis-message.bot");
+    const lastMessage = messages[messages.length - 1];
+
+    if (lastMessage && data.answer) {
+        lastMessage.textContent = data.answer;
+    } else if (lastMessage) {
+        lastMessage.textContent = data.error || "Sorry, I couldn't answer that.";
+    }
+})
+.catch(() => {
+    const messages = document.querySelectorAll(".jarvis-message.bot");
+    const lastMessage = messages[messages.length - 1];
+
+    if (lastMessage) {
+        lastMessage.textContent = "Connection failed. Please try again.";
+    }
+});
+
+/* QUICK-QUESTION BUTTONS */
+
+document.querySelectorAll(".jarvis-question").forEach(button => {
+    button.addEventListener("click", async () => {
+        const question = button.textContent.trim();
+
+        jarvisMessage(question, "user");
+
+        const messagesBefore = document.querySelectorAll(".jarvis-message.bot");
+        jarvisMessage("Thinking...", "bot");
+        const reply = document.querySelectorAll(".jarvis-message.bot");
+        const lastMessage = reply[reply.length - 1];
+
+        try {
+            const response = await fetch("/.netlify/functions/jarvis", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: question })
+            });
+
+            const data = await response.json();
+
+            if (lastMessage) {
+                lastMessage.textContent = response.ok
+                    ? (data.answer || "I couldn't generate an answer.")
+                    : (data.error || "Sorry, something went wrong.");
+            }
+        } catch (error) {
+            if (lastMessage) {
+                lastMessage.textContent = "Connection failed. Please try again.";
+            }
+        }
+    });
+});
+
+/* ===== END JARVIS AI BRAIN ===== */
+  const jarvisQuestionsToggle =
+    document.getElementById("jarvisQuestionsToggle");
+
+const jarvisQuickQuestions =
+    document.querySelector(".jarvis-quick-questions");
+
+jarvisQuestionsToggle.addEventListener("click", function () {
+    jarvisQuickQuestions.classList.toggle("jarvis-questions-hidden");
+
+    if (jarvisQuickQuestions.classList.contains("jarvis-questions-hidden")) {
+        jarvisQuestionsToggle.textContent = "💡 Suggested Questions ▼";
+    } else {
+        jarvisQuestionsToggle.textContent = "💡 Suggested Questions ▲";
+    }
+});
+</script>
+</body>
+</html>
