@@ -1225,10 +1225,12 @@ const jarvisInput = document.getElementById("jarvisInput");
 
 /* OPEN AND CLOSE JARVIS */
 
-jarvisToggle.addEventListener("click", () => {
-    jarvisChat.classList.remove("jarvis-hidden");
-    jarvisToggle.style.display = "none";
-});
+if (jarvisToggle && jarvisChat) {
+    jarvisToggle.addEventListener("click", () => {
+        jarvisChat.classList.remove("jarvis-hidden");
+        jarvisToggle.style.display = "none";
+    });
+    }
 
 jarvisClose.addEventListener("click", () => {
     jarvisChat.classList.add("jarvis-hidden");
