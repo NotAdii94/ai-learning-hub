@@ -1232,10 +1232,12 @@ if (jarvisToggle && jarvisChat) {
     });
     }
 
-jarvisClose.addEventListener("click", () => {
-    jarvisChat.classList.add("jarvis-hidden");
-    jarvisToggle.style.display = "flex";
-});
+if (jarvisClose && jarvisChat && jarvisToggle) {
+    jarvisClose.addEventListener("click", () => {
+        jarvisChat.classList.add("jarvis-hidden");
+        jarvisToggle.style.display = "flex";
+    });
+    }
 
 /* DISPLAY MESSAGES */
 
